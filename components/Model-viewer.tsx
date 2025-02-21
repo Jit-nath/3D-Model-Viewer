@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
-import { BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
+import { BoxGeometry, MeshBasicMaterial, Mesh, Object3D } from 'three';
 import isMobile from '@/hooks/isMobile';
 import { ModelProps } from '@/types/model-type';
 
 const ModelViewer: React.FC<ModelProps> = ({ ModelPath }) => {
-  const [model, setModel] = useState<any>(null);
+  const [model, setModel] = useState<Object3D | null>(null);
   const [scale, setScale] = useState<number[]>([0.09, 0.09, 0.09]);
   const Mobile = isMobile();
 
