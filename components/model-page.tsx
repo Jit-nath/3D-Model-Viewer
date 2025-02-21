@@ -1,7 +1,7 @@
-"use client";
-import React from "react";
-import ModelCard from "@/components/model-card";
-import { useRouter } from "next/navigation";
+'use client';
+import React from 'react';
+import ModelCard from '@/components/model-card';
+import { useRouter } from 'next/navigation';
 
 const ModelPage: React.FC = () => {
   const router = useRouter();
@@ -9,7 +9,7 @@ const ModelPage: React.FC = () => {
   function openPage(name: string) {
     router.push(`/model-viewer/${encodeURIComponent(name)}`);
   }
-  const ModelName = "9dzn Protein";
+  const ModelName = '9dzn Protein';
 
   return (
     <>

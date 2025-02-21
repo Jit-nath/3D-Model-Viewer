@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 interface ModelCardProps {
   imageUrl: string;
@@ -18,7 +18,7 @@ const ModelCard: React.FC<ModelCardProps> = ({ imageUrl, modelName, onClick }) =
           src={imageUrl}
           alt={modelName}
           fill
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: 'cover' }}
           className="rounded-lg"
         />
       </div>

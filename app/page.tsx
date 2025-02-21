@@ -1,7 +1,7 @@
-import { FaGithub } from "react-icons/fa";
-import { SiGithubsponsors } from "react-icons/si";
-import { TbCube3dSphere } from "react-icons/tb";
-import ModelPage from "@/components/model-page";
+import { FaGithub } from 'react-icons/fa';
+import { SiGithubsponsors } from 'react-icons/si';
+import { TbCube3dSphere } from 'react-icons/tb';
+import ModelPage from '@/components/model-page';
 export default function Page() {
   return (
     <>
