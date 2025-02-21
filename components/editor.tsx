@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
+// import { useState } from "react";
 import ModelViewer from "./Model-viewer";
 import { ModelProps } from "@/types/model-type";
 import { VscSettings } from "react-icons/vsc";
 import { FaFile } from "react-icons/fa";
 
 function Editor({ ModelName, ModelPath }: ModelProps) {
-  const [pressed, setPressed] = useState(false);
+  // const [pressed, setPressed] = useState(false);
 
   return (
     <div className="h-screen flex flex-col">

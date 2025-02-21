@@ -4,7 +4,6 @@ import ModelCard from "@/components/model-card";
 import { useRouter } from "next/navigation";
 
 const ModelPage: React.FC = () => {
-  const URL = "https://picsum.photos/300/200";
   const router = useRouter();
 
   function openPage(name: string) {
