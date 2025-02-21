@@ -1,47 +1,37 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import React, { useState, useEffect } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { GLTFLoader } from "three/examples/jsm/Addons.js";
+import { Object3D, BoxGeometry, MeshBasicMaterial, Mesh, Object3DEventMap } from "three";
+import { ModelProps } from "@/types/model-type";
 
-const ModelViewer: React.FC = () => {
-    const mountRef = useRef<HTMLDivElement>(null);
+const ModelViewer: React.FC<ModelProps> = ({ ModelPath }) => {
+  const [model, setModel] = useState<Object3D | null>(null);
 
-    useEffect(() => {
-        const mount = mountRef.current;
-        if (!mount) return;
+  useEffect(() => {
+    if (ModelPath) {
+      const loader = new GLTFLoader();
+      loader.load(ModelPath, (gltf: { scene: React.SetStateAction<Object3D<Object3DEventMap> | null>; }) => {
+        setModel(gltf.scene);
+      });
+    } else {
+      const geometry = new BoxGeometry(1, 1, 1);
+      const material = new MeshBasicMaterial({ color: 0x00ff00 });
+      const box = new Mesh(geometry, material);
+      setModel(box);
+    }
+  }, [ModelPath]);
 
-        // Scene
-        const scene = new THREE.Scene();
-
-        // Camera
-        const camera = new THREE.PerspectiveCamera(75, mount.clientWidth / mount.clientHeight, 0.1, 1000);
-        camera.position.z = 5;
-
-        // Renderer
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(mount.clientWidth, mount.clientHeight);
-        mount.appendChild(renderer.domElement);
-
-        // Cube
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-
-        // Animation loop
-        const animate = () => {
-            requestAnimationFrame(animate);
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
-            renderer.render(scene, camera);
-        };
-        animate();
-
-        // Cleanup
-        return () => {
-            mount.removeChild(renderer.domElement);
-        };
-    }, []);
-
-    return <div ref={mountRef} style={{ width: '100%', height: '100vh' }} />;
+  return (
+    <div style={{ textAlign: "center" }} className="h-full w-full">
+      <Canvas>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[0, 0, 5]} />
+        {model && <primitive object={model} />}
+        <OrbitControls />
+      </Canvas>
+    </div>
+  );
 };
 
 export default ModelViewer;
