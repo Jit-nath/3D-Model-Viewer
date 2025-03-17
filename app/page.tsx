@@ -1,69 +1,42 @@
-'use client';
-import { FaGithub } from 'react-icons/fa';
-import { TbCube3dSphere } from 'react-icons/tb';
-import ModelPage from '@/components/model-page';
-import isMobile from '@/hooks/isMobile';
-import LoveButton from '@/components/like-button';
-import { useEffect, useState } from 'react';
+import Link from "next/link"
+import { Upload } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import ModelCard from "@/components/model-card"
 
-export default function Page() {
-  const [liked, setLiked] = useState(false);
-
-  // This effect runs once on mount to initialize the 'liked' state from localStorage
-  useEffect(() => {
-    const likedStatus = localStorage.getItem('liked');
-    if (likedStatus === null) {
-      localStorage.setItem('liked', 'false');
-      setLiked(false);
-    } else {
-      setLiked(likedStatus === 'true');
-    }
-  }, []);
-
-  const handleClick = () => {
-    const newLikedStatus = !liked;
-    setLiked(newLikedStatus);
-    localStorage.setItem('liked', newLikedStatus.toString());
-  };
-
+export default function HomePage() {
   return (
-    <>
-      <div>
-        {/* Navbar */}
-        <div className="h-20 max-w-full bg-slate-800 flex justify-between items-center px-8">
-          <h1 className="text-xl sm:text-2xl md:text-3xl">3D Model Viewer</h1>
-          <div className="flex space-x-6 text-2xl">
-            <a
-              href="https://github.com/Jit-nath/3D-Model-Viewer"
-              title="Go to GitHub"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub className="" />
-            </a>
-            <div onClick={handleClick}>
-              <LoveButton liked={liked} />
-            </div>
-          </div>
-        </div>
-        {/* Upload model */}
-        <div className="flex flex-col items-center justify-center h-[80vh]">
-          <div className="w-[80vw] sm:max-w-2xl p-2 sm:p-8 bg-gray-600 rounded-lg shadow-md">
-            <div className="relative border-4 border-dashed border-white rounded-lg h-60 sm:h-96 flex flex-col justify-center items-center">
-              <TbCube3dSphere className="scale-150 text-5xl" />
-              <p className="text-gray-500 m-2 text-center absolute bottom-0">
-                {isMobile()
-                  ? 'Tap to select'
-                  : 'Drag and drop a file or click to select'}
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* Gallery view of example models */}
-        <div className="p-8">
-          <ModelPage />
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold mb-8 text-center">3D Model Editor</h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <Card className="flex flex-col items-center justify-center p-8 h-64 border-dashed border-2">
+          <Upload className="h-12 w-12 mb-4 text-muted-foreground" />
+          <h2 className="text-xl font-semibold mb-4">Upload Your Model</h2>
+          <Link href="/editor?new=true">
+            <Button>Upload File</Button>
+          </Link>
+        </Card>
+
+        <Card className="flex flex-col items-center justify-center p-8 h-64">
+          <h2 className="text-xl font-semibold mb-4">Start from Scratch</h2>
+          <p className="text-center text-muted-foreground mb-4">Create a new 3D model from scratch</p>
+          <Link href="/editor?new=true">
+            <Button variant="outline">Create New</Button>
+          </Link>
+        </Card>
       </div>
-    </>
-  );
+
+      <h2 className="text-2xl font-bold mb-6">Example Models</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ModelCard name="Duck" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/assets/3d/duck.glb" />
+        <ModelCard name="Cube" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/cube" />
+        <ModelCard name="Sphere" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/sphere" />
+        <ModelCard name="Torus" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/torus" />
+        <ModelCard name="Teapot" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/teapot" />
+        <ModelCard name="Character" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/character" />
+      </div>
+    </div>
+  )
 }
+

@@ -1,30 +1,33 @@
-import React from 'react';
-import Image from 'next/image';
+import Image from "next/image"
+import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Eye } from "lucide-react"
 
 interface ModelCardProps {
-  imageUrl: string;
-  modelName: string;
-  onClick: () => void;
+  name: string
+  thumbnail: string
+  modelPath: string
 }
 
-const ModelCard: React.FC<ModelCardProps> = ({ imageUrl, modelName, onClick }) => {
+export default function ModelCard({ name, thumbnail, modelPath }: ModelCardProps) {
   return (
-    <div
-      className="w-full max-w-xs mx-auto border border-gray-300 rounded-lg p-4 flex flex-col items-center gap-4 cursor-pointer"
-      onClick={onClick}
-    >
-      <div className="relative w-full h-48">
-        <Image
-          src={imageUrl}
-          alt={modelName}
-          fill
-          style={{ objectFit: 'cover' }}
-          className="rounded-lg"
-        />
+    <Card className="overflow-hidden">
+      <div className="relative aspect-square">
+        <Image src={thumbnail || "/placeholder.svg"} alt={name} fill className="object-cover" />
       </div>
-      <h1 className="text-center text-lg font-semibold">{modelName}</h1>
-    </div>
-  );
-};
+      <CardContent className="p-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-medium">{name}</h3>
+          <Link href={`/editor?model=${encodeURIComponent(modelPath)}`}>
+            <Button size="sm" variant="ghost">
+              <Eye className="h-4 w-4 mr-2" />
+              Open
+            </Button>
+          </Link>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
 
-export default ModelCard;
