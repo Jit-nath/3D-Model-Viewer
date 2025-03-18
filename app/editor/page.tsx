@@ -38,21 +38,10 @@ import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import ModelEditor from "@/components/model-editor";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useTheme } from "next-themes";
 import { toast } from "@/hooks/use-toast";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -78,11 +67,7 @@ export default function EditorPage() {
   // Handle keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (
-        e.target instanceof HTMLInputElement ||
-        e.target instanceof HTMLTextAreaElement
-      )
-        return;
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
       switch (e.key.toLowerCase()) {
         case "g":
@@ -167,11 +152,7 @@ export default function EditorPage() {
   return (
     <div className="flex flex-col h-screen">
       {/* Top toolbar */}
-      <div
-        className={`bg-background border-b p-2 flex items-center justify-between ${
-          smallScreen && "hidden"
-        }`}
-      >
+      <div className={`bg-background border-b p-2 flex items-center justify-between ${smallScreen && "hidden"}`}>
         <div className="flex items-center space-x-2">
           <TooltipProvider>
             <Tooltip>
@@ -221,13 +202,7 @@ export default function EditorPage() {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() =>
-                    toast({ title: "Undo", description: "Action undone" })
-                  }
-                >
+                <Button variant="ghost" size="icon" onClick={() => toast({ title: "Undo", description: "Action undone" })}>
                   <Undo className="h-5 w-5" />
                 </Button>
               </TooltipTrigger>
@@ -240,13 +215,7 @@ export default function EditorPage() {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() =>
-                    toast({ title: "Redo", description: "Action redone" })
-                  }
-                >
+                <Button variant="ghost" size="icon" onClick={() => toast({ title: "Redo", description: "Action redone" })}>
                   <Redo className="h-5 w-5" />
                 </Button>
               </TooltipTrigger>
@@ -263,16 +232,8 @@ export default function EditorPage() {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowGrid(!showGrid)}
-                >
-                  <Grid3X3
-                    className={`h-5 w-5 ${
-                      showGrid ? "text-primary" : "text-muted-foreground"
-                    }`}
-                  />
+                <Button variant="ghost" size="icon" onClick={() => setShowGrid(!showGrid)}>
+                  <Grid3X3 className={`h-5 w-5 ${showGrid ? "text-primary" : "text-muted-foreground"}`} />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
@@ -284,16 +245,8 @@ export default function EditorPage() {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowWireframe(!showWireframe)}
-                >
-                  {showWireframe ? (
-                    <Eye className="h-5 w-5 text-primary" />
-                  ) : (
-                    <EyeOff className="h-5 w-5 text-muted-foreground" />
-                  )}
+                <Button variant="ghost" size="icon" onClick={() => setShowWireframe(!showWireframe)}>
+                  {showWireframe ? <Eye className="h-5 w-5 text-primary" /> : <EyeOff className="h-5 w-5 text-muted-foreground" />}
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
@@ -306,11 +259,7 @@ export default function EditorPage() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="ghost" size="icon" onClick={toggleTheme}>
-                  {theme === "dark" ? (
-                    <SunMedium className="h-5 w-5" />
-                  ) : (
-                    <Moon className="h-5 w-5" />
-                  )}
+                  {theme === "dark" ? <SunMedium className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
@@ -323,11 +272,7 @@ export default function EditorPage() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Left sidebar */}
-        <div
-          className={`w-16 bg-background border-r flex flex-col items-center py-4 space-y-4 ${
-            smallScreen && "hidden"
-          }`}
-        >
+        <div className={`w-16 bg-background border-r flex flex-col items-center py-4 space-y-4 ${smallScreen && "hidden"}`}>
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -335,11 +280,7 @@ export default function EditorPage() {
                   variant={activeTool === "move" ? "default" : "ghost"}
                   size="icon"
                   onClick={() => setActiveTool("move")}
-                  className={
-                    activeTool === "move"
-                      ? "bg-primary text-primary-foreground"
-                      : ""
-                  }
+                  className={activeTool === "move" ? "bg-primary text-primary-foreground" : ""}
                 >
                   <Move className="h-5 w-5" />
                 </Button>
@@ -357,11 +298,7 @@ export default function EditorPage() {
                   variant={activeTool === "rotate" ? "default" : "ghost"}
                   size="icon"
                   onClick={() => setActiveTool("rotate")}
-                  className={
-                    activeTool === "rotate"
-                      ? "bg-primary text-primary-foreground"
-                      : ""
-                  }
+                  className={activeTool === "rotate" ? "bg-primary text-primary-foreground" : ""}
                 >
                   <Rotate className="h-5 w-5" />
                 </Button>
@@ -379,11 +316,7 @@ export default function EditorPage() {
                   variant={activeTool === "scale" ? "default" : "ghost"}
                   size="icon"
                   onClick={() => setActiveTool("scale")}
-                  className={
-                    activeTool === "scale"
-                      ? "bg-primary text-primary-foreground"
-                      : ""
-                  }
+                  className={activeTool === "scale" ? "bg-primary text-primary-foreground" : ""}
                 >
                   <Scale className="h-5 w-5" />
                 </Button>
@@ -449,8 +382,7 @@ export default function EditorPage() {
                   onClick={() => {
                     toast({
                       title: "Cylinder Added",
-                      description:
-                        "A new cylinder has been added to the scene.",
+                      description: "A new cylinder has been added to the scene.",
                     });
                   }}
                 >
@@ -472,11 +404,7 @@ export default function EditorPage() {
                   variant={activeTool === "vertex" ? "default" : "ghost"}
                   size="icon"
                   onClick={() => setActiveTool("vertex")}
-                  className={
-                    activeTool === "vertex"
-                      ? "bg-primary text-primary-foreground"
-                      : ""
-                  }
+                  className={activeTool === "vertex" ? "bg-primary text-primary-foreground" : ""}
                 >
                   <Pipette className="h-5 w-5" />
                 </Button>
@@ -494,11 +422,7 @@ export default function EditorPage() {
                   variant={activeTool === "edge" ? "default" : "ghost"}
                   size="icon"
                   onClick={() => setActiveTool("edge")}
-                  className={
-                    activeTool === "edge"
-                      ? "bg-primary text-primary-foreground"
-                      : ""
-                  }
+                  className={activeTool === "edge" ? "bg-primary text-primary-foreground" : ""}
                 >
                   <Scissors className="h-5 w-5" />
                 </Button>
@@ -516,11 +440,7 @@ export default function EditorPage() {
                   variant={activeTool === "face" ? "default" : "ghost"}
                   size="icon"
                   onClick={() => setActiveTool("face")}
-                  className={
-                    activeTool === "face"
-                      ? "bg-primary text-primary-foreground"
-                      : ""
-                  }
+                  className={activeTool === "face" ? "bg-primary text-primary-foreground" : ""}
                 >
                   <Combine className="h-5 w-5" />
                 </Button>
@@ -543,11 +463,7 @@ export default function EditorPage() {
                     setActiveTool("paint");
                     setActiveTab("material");
                   }}
-                  className={
-                    activeTool === "paint"
-                      ? "bg-primary text-primary-foreground"
-                      : ""
-                  }
+                  className={activeTool === "paint" ? "bg-primary text-primary-foreground" : ""}
                 >
                   <Brush className="h-5 w-5" />
                 </Button>
@@ -565,11 +481,7 @@ export default function EditorPage() {
                   variant={activeTool === "erase" ? "default" : "ghost"}
                   size="icon"
                   onClick={() => setActiveTool("erase")}
-                  className={
-                    activeTool === "erase"
-                      ? "bg-primary text-primary-foreground"
-                      : ""
-                  }
+                  className={activeTool === "erase" ? "bg-primary text-primary-foreground" : ""}
                 >
                   <Eraser className="h-5 w-5" />
                 </Button>
@@ -628,13 +540,7 @@ export default function EditorPage() {
 
         {/* Main editor area */}
         <div className="flex-1 relative">
-          <Suspense
-            fallback={
-              <div className="w-full h-full flex items-center justify-center">
-                Loading...
-              </div>
-            }
-          >
+          <Suspense fallback={<div className="w-full h-full flex items-center justify-center">Loading...</div>}>
             <ModelEditor
               modelPath={modelPath}
               showGrid={showGrid}
@@ -648,11 +554,7 @@ export default function EditorPage() {
         </div>
 
         {/* Right sidebar */}
-        <div
-          className={`min-w-96 bg-background border-l p-4 overflow-y-auto ${
-            smallScreen && "hidden"
-          }`}
-        >
+        <div className={`min-w-96 bg-background border-l p-4 overflow-y-auto ${smallScreen && "hidden"}`}>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="w-full">
               <TabsTrigger value="transform" className="flex-1">
@@ -768,8 +670,7 @@ export default function EditorPage() {
                   onClick={() => {
                     toast({
                       title: "Transform Reset",
-                      description:
-                        "Object transform has been reset to default values.",
+                      description: "Object transform has been reset to default values.",
                     });
                   }}
                 >
@@ -785,11 +686,7 @@ export default function EditorPage() {
                   {colors.map((color) => (
                     <div
                       key={color}
-                      className={`w-full aspect-square rounded-md cursor-pointer border ${
-                        selectedColor === color
-                          ? "ring-2 ring-primary ring-offset-2"
-                          : ""
-                      }`}
+                      className={`w-full aspect-square rounded-md cursor-pointer border ${selectedColor === color ? "ring-2 ring-primary ring-offset-2" : ""}`}
                       style={{ backgroundColor: color }}
                       onClick={() => setSelectedColor(color)}
                     />
@@ -867,12 +764,8 @@ export default function EditorPage() {
                     id="subdivision"
                     onCheckedChange={(checked) => {
                       toast({
-                        title: checked
-                          ? "Subdivision Applied"
-                          : "Subdivision Removed",
-                        description: checked
-                          ? "Subdivision modifier has been applied."
-                          : "Subdivision modifier has been removed.",
+                        title: checked ? "Subdivision Applied" : "Subdivision Removed",
+                        description: checked ? "Subdivision modifier has been applied." : "Subdivision modifier has been removed.",
                       });
                     }}
                   />
@@ -897,8 +790,7 @@ export default function EditorPage() {
                     onClick={() => {
                       toast({
                         title: "Union Operation",
-                        description:
-                          "Union boolean operation applied to selected objects.",
+                        description: "Union boolean operation applied to selected objects.",
                       });
                     }}
                   >
@@ -911,8 +803,7 @@ export default function EditorPage() {
                     onClick={() => {
                       toast({
                         title: "Difference Operation",
-                        description:
-                          "Difference boolean operation applied to selected objects.",
+                        description: "Difference boolean operation applied to selected objects.",
                       });
                     }}
                   >
@@ -925,8 +816,7 @@ export default function EditorPage() {
                     onClick={() => {
                       toast({
                         title: "Intersection Operation",
-                        description:
-                          "Intersection boolean operation applied to selected objects.",
+                        description: "Intersection boolean operation applied to selected objects.",
                       });
                     }}
                   >
@@ -945,14 +835,11 @@ export default function EditorPage() {
                     onClick={() => {
                       toast({
                         title: "Bend Modifier",
-                        description:
-                          "Bend modifier applied to selected object.",
+                        description: "Bend modifier applied to selected object.",
                       });
                     }}
                   >
-                    <span className="w-4 h-4 mr-2 flex items-center justify-center text-yellow-500">
-                      ↪
-                    </span>
+                    <span className="w-4 h-4 mr-2 flex items-center justify-center text-yellow-500">↪</span>
                     Bend
                   </Button>
                   <Button
@@ -961,14 +848,11 @@ export default function EditorPage() {
                     onClick={() => {
                       toast({
                         title: "Twist Modifier",
-                        description:
-                          "Twist modifier applied to selected object.",
+                        description: "Twist modifier applied to selected object.",
                       });
                     }}
                   >
-                    <span className="w-4 h-4 mr-2 flex items-center justify-center text-purple-500">
-                      ↻
-                    </span>
+                    <span className="w-4 h-4 mr-2 flex items-center justify-center text-purple-500">↻</span>
                     Twist
                   </Button>
                   <Button
@@ -977,14 +861,11 @@ export default function EditorPage() {
                     onClick={() => {
                       toast({
                         title: "Taper Modifier",
-                        description:
-                          "Taper modifier applied to selected object.",
+                        description: "Taper modifier applied to selected object.",
                       });
                     }}
                   >
-                    <span className="w-4 h-4 mr-2 flex items-center justify-center text-orange-500">
-                      ◆
-                    </span>
+                    <span className="w-4 h-4 mr-2 flex items-center justify-center text-orange-500">◆</span>
                     Taper
                   </Button>
                 </div>
@@ -994,36 +875,20 @@ export default function EditorPage() {
             <TabsContent value="scene" className="space-y-4 mt-4">
               <div className="flex items-center justify-between">
                 <Label htmlFor="grid-toggle">Show Grid</Label>
-                <Switch
-                  id="grid-toggle"
-                  checked={showGrid}
-                  onCheckedChange={setShowGrid}
-                />
+                <Switch id="grid-toggle" checked={showGrid} onCheckedChange={setShowGrid} />
               </div>
 
               <div className="flex items-center justify-between">
                 <Label htmlFor="wireframe-toggle">Show Wireframe</Label>
-                <Switch
-                  id="wireframe-toggle"
-                  checked={showWireframe}
-                  onCheckedChange={setShowWireframe}
-                />
+                <Switch id="wireframe-toggle" checked={showWireframe} onCheckedChange={setShowWireframe} />
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label>Light Intensity</Label>
-                  <span className="text-sm text-muted-foreground">
-                    {lightIntensity.toFixed(1)}
-                  </span>
+                  <span className="text-sm text-muted-foreground">{lightIntensity.toFixed(1)}</span>
                 </div>
-                <Slider
-                  value={[lightIntensity]}
-                  onValueChange={(values) => setLightIntensity(values[0])}
-                  max={2}
-                  min={0}
-                  step={0.1}
-                />
+                <Slider value={[lightIntensity]} onValueChange={(values) => setLightIntensity(values[0])} max={2} min={0} step={0.1} />
               </div>
 
               <div className="space-y-2">
@@ -1033,11 +898,7 @@ export default function EditorPage() {
                     <Button
                       key={env}
                       variant={environment === env ? "default" : "outline"}
-                      className={`w-full capitalize ${
-                        environment === env
-                          ? "bg-primary text-primary-foreground"
-                          : ""
-                      }`}
+                      className={`w-full capitalize ${environment === env ? "bg-primary text-primary-foreground" : ""}`}
                       onClick={() => setEnvironment(env)}
                     >
                       {env}
@@ -1049,22 +910,19 @@ export default function EditorPage() {
               <div className="space-y-2">
                 <Label>Background Color</Label>
                 <div className="grid grid-cols-5 gap-2">
-                  {["#000000", "#ffffff", "#1e293b", "#0f172a", "#18181b"].map(
-                    (color) => (
-                      <div
-                        key={color}
-                        className="w-full aspect-square rounded-md cursor-pointer border"
-                        style={{ backgroundColor: color }}
-                        onClick={() => {
-                          toast({
-                            title: "Background Changed",
-                            description:
-                              "Scene background color has been updated.",
-                          });
-                        }}
-                      />
-                    )
-                  )}
+                  {["#000000", "#ffffff", "#1e293b", "#0f172a", "#18181b"].map((color) => (
+                    <div
+                      key={color}
+                      className="w-full aspect-square rounded-md cursor-pointer border"
+                      style={{ backgroundColor: color }}
+                      onClick={() => {
+                        toast({
+                          title: "Background Changed",
+                          description: "Scene background color has been updated.",
+                        });
+                      }}
+                    />
+                  ))}
                 </div>
               </div>
             </TabsContent>
@@ -1078,11 +936,7 @@ export default function EditorPage() {
           <div className="bg-background border rounded-lg shadow-lg p-6 w-[500px] max-w-[90vw]">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-lg">Export Model</h3>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowExportDialog(false)}
-              >
+              <Button variant="ghost" size="icon" onClick={() => setShowExportDialog(false)}>
                 <X className="h-4 w-4" />
               </Button>
             </div>
@@ -1119,13 +973,7 @@ export default function EditorPage() {
                     <Label htmlFor="export-scale">Scale</Label>
                     <span className="text-sm text-muted-foreground">1.00</span>
                   </div>
-                  <Slider
-                    id="export-scale"
-                    defaultValue={[1]}
-                    max={2}
-                    min={0.1}
-                    step={0.1}
-                  />
+                  <Slider id="export-scale" defaultValue={[1]} max={2} min={0.1} step={0.1} />
                 </div>
 
                 <div className="flex items-center space-x-2">
@@ -1160,22 +1008,14 @@ export default function EditorPage() {
                 </div>
 
                 <div className="p-3 bg-muted rounded-md text-sm text-muted-foreground">
-                  <p>
-                    Advanced export settings affect file size and compatibility.
-                  </p>
-                  <p className="mt-1">
-                    Higher quality settings preserve more detail but result in
-                    larger files.
-                  </p>
+                  <p>Advanced export settings affect file size and compatibility.</p>
+                  <p className="mt-1">Higher quality settings preserve more detail but result in larger files.</p>
                 </div>
               </TabsContent>
             </Tabs>
 
             <div className="flex justify-end space-x-2 mt-6">
-              <Button
-                variant="outline"
-                onClick={() => setShowExportDialog(false)}
-              >
+              <Button variant="outline" onClick={() => setShowExportDialog(false)}>
                 Cancel
               </Button>
               <Button onClick={() => handleExportConfirm("glb")}>

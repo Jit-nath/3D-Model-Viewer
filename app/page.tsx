@@ -1,8 +1,8 @@
-import Link from "next/link"
-import { Upload } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import ModelCard from "@/components/model-card"
+import Link from "next/link";
+import { Upload } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import ModelCard from "@/components/model-card";
 
 export default function HomePage() {
   return (
@@ -37,6 +37,5 @@ export default function HomePage() {
         <ModelCard name="Character" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/character" />
       </div>
     </div>
-  )
+  );
 }
-

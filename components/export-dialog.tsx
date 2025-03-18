@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Download, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState } from "react";
+import { Download, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface ExportDialogProps {
-  onClose: () => void
-  onExport: (format: string, options: ExportOptions) => void
+  onClose: () => void;
+  onExport: (format: string, options: ExportOptions) => void;
 }
 
 interface ExportOptions {
-  scale: number
-  includeTextures: boolean
-  includeAnimations: boolean
-  quality: "low" | "medium" | "high"
-  compress: boolean
+  scale: number;
+  includeTextures: boolean;
+  includeAnimations: boolean;
+  quality: "low" | "medium" | "high";
+  compress: boolean;
 }
 
 export default function ExportDialog({ onClose, onExport }: ExportDialogProps) {
-  const [format, setFormat] = useState("glb")
-  const [scale, setScale] = useState([1])
-  const [includeTextures, setIncludeTextures] = useState(true)
-  const [includeAnimations, setIncludeAnimations] = useState(false)
-  const [quality, setQuality] = useState<"low" | "medium" | "high">("medium")
-  const [compress, setCompress] = useState(true)
+  const [format, setFormat] = useState("glb");
+  const [scale, setScale] = useState([1]);
+  const [includeTextures, setIncludeTextures] = useState(true);
+  const [includeAnimations, setIncludeAnimations] = useState(false);
+  const [quality, setQuality] = useState<"low" | "medium" | "high">("medium");
+  const [compress, setCompress] = useState(true);
 
   const handleExport = () => {
     onExport(format, {
@@ -37,8 +37,8 @@ export default function ExportDialog({ onClose, onExport }: ExportDialogProps) {
       includeAnimations,
       quality,
       compress,
-    })
-  }
+    });
+  };
 
   return (
     <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
@@ -86,20 +86,12 @@ export default function ExportDialog({ onClose, onExport }: ExportDialogProps) {
             </div>
 
             <div className="flex items-center space-x-2">
-              <Checkbox
-                id="export-textures"
-                checked={includeTextures}
-                onCheckedChange={(checked) => setIncludeTextures(checked === true)}
-              />
+              <Checkbox id="export-textures" checked={includeTextures} onCheckedChange={(checked) => setIncludeTextures(checked === true)} />
               <Label htmlFor="export-textures">Include Textures</Label>
             </div>
 
             <div className="flex items-center space-x-2">
-              <Checkbox
-                id="export-animations"
-                checked={includeAnimations}
-                onCheckedChange={(checked) => setIncludeAnimations(checked === true)}
-              />
+              <Checkbox id="export-animations" checked={includeAnimations} onCheckedChange={(checked) => setIncludeAnimations(checked === true)} />
               <Label htmlFor="export-animations">Include Animations</Label>
             </div>
           </TabsContent>
@@ -120,11 +112,7 @@ export default function ExportDialog({ onClose, onExport }: ExportDialogProps) {
             </div>
 
             <div className="flex items-center space-x-2">
-              <Checkbox
-                id="export-compress"
-                checked={compress}
-                onCheckedChange={(checked) => setCompress(checked === true)}
-              />
+              <Checkbox id="export-compress" checked={compress} onCheckedChange={(checked) => setCompress(checked === true)} />
               <Label htmlFor="export-compress">Compress Output</Label>
             </div>
 
@@ -146,6 +134,5 @@ export default function ExportDialog({ onClose, onExport }: ExportDialogProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

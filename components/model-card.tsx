@@ -1,13 +1,13 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Eye } from "lucide-react"
+import Image from "next/image";
+import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Eye } from "lucide-react";
 
 interface ModelCardProps {
-  name: string
-  thumbnail: string
-  modelPath: string
+  name: string;
+  thumbnail: string;
+  modelPath: string;
 }
 
 export default function ModelCard({ name, thumbnail, modelPath }: ModelCardProps) {
@@ -28,6 +28,5 @@ export default function ModelCard({ name, thumbnail, modelPath }: ModelCardProps
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
-

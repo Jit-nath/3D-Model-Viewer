@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { Canvas, useThree } from "@react-three/fiber"
-import { OrbitControls, useTexture } from "@react-three/drei"
-import { Button } from "@/components/ui/button"
-import { Slider } from "@/components/ui/slider"
-import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useEffect, useState } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { OrbitControls, useTexture } from "@react-three/drei";
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface TextureMapperProps {
-  modelPath: string
+  modelPath: string;
 }
 
 function UVMappingVisualizer() {
-  const texture = useTexture("/placeholder.svg?height=512&width=512")
-  const checkerboardTexture = useTexture("/placeholder.svg?height=512&width=512")
-  const [activeTexture, setActiveTexture] = useState(texture)
-  const { camera } = useThree()
+  const texture = useTexture("/placeholder.svg?height=512&width=512");
+  const checkerboardTexture = useTexture("/placeholder.svg?height=512&width=512");
+  const [activeTexture, setActiveTexture] = useState(texture);
+  const { camera } = useThree();
 
   // Position camera for better view of UV mapping
   useEffect(() => {
-    camera.position.set(0, 0, 3)
-  }, [camera])
+    camera.position.set(0, 0, 3);
+  }, [camera]);
 
   return (
     <>
@@ -35,13 +35,13 @@ function UVMappingVisualizer() {
 
       <OrbitControls />
     </>
-  )
+  );
 }
 
 export default function TextureMapper({ modelPath }: TextureMapperProps) {
-  const [uvScale, setUVScale] = useState([1])
-  const [uvOffset, setUVOffset] = useState([0])
-  const [uvRotation, setUVRotation] = useState([0])
+  const [uvScale, setUVScale] = useState([1]);
+  const [uvOffset, setUVOffset] = useState([0]);
+  const [uvRotation, setUVRotation] = useState([0]);
 
   return (
     <div className="flex flex-col h-full">
@@ -118,6 +118,5 @@ export default function TextureMapper({ modelPath }: TextureMapperProps) {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }
-

@@ -6,13 +6,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import type * as THREE from "three";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 
 type OperationType = "union" | "subtract" | "intersect" | "none";
@@ -56,21 +50,13 @@ function BooleanDemo() {
 
       <group>
         {/* First object */}
-        <mesh
-          ref={box1Ref}
-          position={[-0.5, 0, 0]}
-          visible={operation === "none"}
-        >
+        <mesh ref={box1Ref} position={[-0.5, 0, 0]} visible={operation === "none"}>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="#ff6b6b" transparent opacity={0.8} />
         </mesh>
 
         {/* Second object */}
-        <mesh
-          ref={box2Ref}
-          position={[0.5, 0, 0]}
-          visible={operation === "none"}
-        >
+        <mesh ref={box2Ref} position={[0.5, 0, 0]} visible={operation === "none"}>
           <sphereGeometry args={[0.6, 32, 32]} />
           <meshStandardMaterial color="#4ecdc4" transparent opacity={0.8} />
         </mesh>
@@ -102,10 +88,7 @@ export default function BooleanOperations() {
         <div className="space-y-4">
           <div className="space-y-2">
             <Label>Operation</Label>
-            <Select
-              value={operation}
-              onValueChange={(value) => setOperation(value as OperationType)}
-            >
+            <Select value={operation} onValueChange={(value) => setOperation(value as OperationType)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select operation" />
               </SelectTrigger>
