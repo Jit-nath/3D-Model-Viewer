@@ -3,6 +3,7 @@ import { Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ModelCard from "@/components/model-card";
+import UploadModal from "@/components/upload-modal";
 
 export default function HomePage() {
   return (
@@ -13,16 +14,14 @@ export default function HomePage() {
         <Card className="flex flex-col items-center justify-center p-8 h-64 border-dashed border-2">
           <Upload className="h-12 w-12 mb-4 text-muted-foreground" />
           <h2 className="text-xl font-semibold mb-4">Upload Your Model</h2>
-          <Link href="/editor?new=true">
-            <Button>Upload File</Button>
-          </Link>
+          <UploadModal />
         </Card>
 
         <Card className="flex flex-col items-center justify-center p-8 h-64">
           <h2 className="text-xl font-semibold mb-4">Start from Scratch</h2>
           <p className="text-center text-muted-foreground mb-4">Create a new 3D model from scratch</p>
           <Link href="/editor?new=true">
-            <Button variant="outline">Create New</Button>
+            <Button variant="secondary">Create New</Button>
           </Link>
         </Card>
       </div>
