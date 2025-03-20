@@ -1,0 +1,28 @@
+{
+  "Models": [
+    {
+      "id": 1,
+      "name": "monk",
+      "thumbnail": "https://oagsprvqqc.ufs.sh/f/UfD2xF6GnX2EIgJshfcecz612d4SKJMTHQyU370YronPkNap",
+      "path": "https://oagsprvqqc.ufs.sh/f/UfD2xF6GnX2EPrpopwRbcJ5U3uAtzdpG02D8yNnOjXHq7WSl"
+    },
+    {
+      "id": 2,
+      "name": "ufo",
+      "thumbnail": "https://oagsprvqqc.ufs.sh/f/UfD2xF6GnX2EWEWQEGTpHqIxL5kKweTjXBRoZlMs7FmghU14",
+      "path": "https://oagsprvqqc.ufs.sh/f/UfD2xF6GnX2EuB1DmACh5oPDNGftiX0aW8LjJExdH1Z7sA4F"
+    },
+    {
+      "id": 3,
+      "name": "jeep",
+      "thumbnail": "https://oagsprvqqc.ufs.sh/f/UfD2xF6GnX2Ej574x5oO90zlC1kQJVAsrMxn2UKpZYeTWagi",
+      "path": "https://oagsprvqqc.ufs.sh/f/UfD2xF6GnX2Epy9MwIsKZ7aNjIfkmG3SXPbo0YOR4JV8s19d"
+    },
+    {
+      "id": 4,
+      "name": "duck",
+      "thumbnail": "https://oagsprvqqc.ufs.sh/f/UfD2xF6GnX2EWES1NyTpHqIxL5kKweTjXBRoZlMs7FmghU14",
+      "path": "https://oagsprvqqc.ufs.sh/f/UfD2xF6GnX2Efujr87pJr1p3TVC2IjZSkAhb8B5qdl6uGn7o"
+    }
+  ]
+}

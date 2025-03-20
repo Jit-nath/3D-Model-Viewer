@@ -46,11 +46,12 @@ import { useTheme } from "next-themes";
 import { toast } from "@/hooks/use-toast";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useIsMobile } from "@/hooks/use-mobile";
+import Image from "next/image";
 
 export default function EditorPage() {
   const searchParams = useSearchParams();
-  const modelPath = searchParams.get("model") || "";
-  // const isNew = searchParams.get("new") === "true"
+  const modelPath = decodeURIComponent(searchParams.get("model") || "");
+
   const { theme, setTheme } = useTheme();
 
   const [showGrid, setShowGrid] = useState(true);
@@ -538,9 +539,16 @@ export default function EditorPage() {
           </TooltipProvider>
         </div>
 
-        {/* Main editor area */}
+        {/* Main editor area ............................................................................*/}
         <div className="flex-1 relative">
-          <Suspense fallback={<div className="w-full h-full flex items-center justify-center">Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="w-full h-full flex flex-col items-center justify-center">
+                <Image src="/loading.gif" height={100} width={100} alt="Loading..." priority />
+                <p>Loading...</p>
+              </div>
+            }
+          >
             <ModelEditor
               modelPath={modelPath}
               showGrid={showGrid}
@@ -553,7 +561,7 @@ export default function EditorPage() {
           </Suspense>
         </div>
 
-        {/* Right sidebar */}
+        {/* Right sidebar ................................................................................*/}
         <div className={`min-w-96 bg-background border-l p-4 overflow-y-auto ${smallScreen && "hidden"}`}>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="w-full">

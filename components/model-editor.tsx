@@ -164,8 +164,8 @@ function Scene({ modelPath, showGrid, lightIntensity, activeTool, selectedColor,
       <group ref={groupRef} onClick={handleClick}>
         <Center>
           {modelPath ? (
-            modelPath === "/duck.glb" || modelPath === "/assets/3d/duck.glb" ? (
-              <Model url="/assets/3d/duck.glb" showWireframe={showWireframe} />
+            modelPath !== "new" && modelPath !== "" ? (
+              <Model url={modelPath} showWireframe={showWireframe} />
             ) : (
               <DefaultModel showWireframe={showWireframe} color={selectedColor} />
             )

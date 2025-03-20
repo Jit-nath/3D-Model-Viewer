@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ModelCard from "@/components/model-card";
 import UploadModal from "@/components/upload-modal";
+import modelsData from "@/public/models.json";
 
 export default function HomePage() {
   return (
@@ -28,12 +29,9 @@ export default function HomePage() {
 
       <h2 className="text-2xl font-bold mb-6">Example Models</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <ModelCard name="Duck" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/assets/3d/duck.glb" />
-        <ModelCard name="Cube" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/cube" />
-        <ModelCard name="Sphere" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/sphere" />
-        <ModelCard name="Torus" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/torus" />
-        <ModelCard name="Teapot" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/teapot" />
-        <ModelCard name="Character" thumbnail="/placeholder.svg?height=200&width=200" modelPath="/character" />
+        {modelsData.Models.map((model) => (
+          <ModelCard key={model.id} name={model.name} thumbnail={model.thumbnail} modelPath={model.path} />
+        ))}
       </div>
     </div>
   );
