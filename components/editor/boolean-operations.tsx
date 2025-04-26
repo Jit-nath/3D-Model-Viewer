@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
-// import { useThree } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import type * as THREE from "three";
 import { Button } from "@/components/ui/button";
@@ -16,32 +15,32 @@ function BooleanDemo() {
   const box1Ref = useRef<THREE.Mesh>(null);
   const box2Ref = useRef<THREE.Mesh>(null);
   const resultRef = useRef<THREE.Mesh>(null);
-  // const { scene } = useThree();
+  const { scene } = useThree();
 
-  // const performOperation = () => {
-  //   if (!box1Ref.current || !box2Ref.current || !resultRef.current) return;
+  const performOperation = () => {
+    if (!box1Ref.current || !box2Ref.current || !resultRef.current) return;
 
-  //   switch (operation) {
-  //     case "union":
-  //       resultRef.current.visible = true;
-  //       resultRef.current.position.set(0, 0, 0);
-  //       resultRef.current.scale.set(1.5, 1, 1.5);
-  //       break;
-  //     case "subtract":
-  //       resultRef.current.visible = true;
-  //       resultRef.current.position.set(-0.25, 0, 0);
-  //       resultRef.current.scale.set(0.75, 1, 1);
-  //       break;
-  //     case "intersect":
-  //       resultRef.current.visible = true;
-  //       resultRef.current.position.set(0.25, 0, 0);
-  //       resultRef.current.scale.set(0.5, 1, 0.5);
-  //       break;
-  //     case "none":
-  //       resultRef.current.visible = false;
-  //       break;
-  //   }
-  // };
+    switch (operation) {
+      case "union":
+        resultRef.current.visible = true;
+        resultRef.current.position.set(0, 0, 0);
+        resultRef.current.scale.set(1.5, 1, 1.5);
+        break;
+      case "subtract":
+        resultRef.current.visible = true;
+        resultRef.current.position.set(-0.25, 0, 0);
+        resultRef.current.scale.set(0.75, 1, 1);
+        break;
+      case "intersect":
+        resultRef.current.visible = true;
+        resultRef.current.position.set(0.25, 0, 0);
+        resultRef.current.scale.set(0.5, 1, 0.5);
+        break;
+      case "none":
+        resultRef.current.visible = false;
+        break;
+    }
+  };
 
   return (
     <>

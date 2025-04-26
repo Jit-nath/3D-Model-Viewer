@@ -10,20 +10,40 @@ import { Label } from "@/components/ui/label";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stage } from "@react-three/drei";
 
+interface ExportOptions {
+  format: "glb" | "gltf" | "obj" | "stl" | "fbx";
+  quality: "low" | "medium" | "high";
+  includeTextures: boolean;
+  compressOutput: boolean;
+  includeAnimations: boolean;
+}
+
 export default function ExportPage() {
   const router = useRouter();
-  const [format, setFormat] = useState("glb");
-  const [quality, setQuality] = useState("medium");
-  const [includeTextures, setIncludeTextures] = useState(true);
+  const [options, setOptions] = useState<ExportOptions>({
+    format: "glb",
+    quality: "medium",
+    includeTextures: true,
+    compressOutput: true,
+    includeAnimations: false,
+  });
+
+  const [isExporting, setIsExporting] = useState(false);
 
   const handleExport = () => {
-    // In a real implementation, this would trigger the export process
-    console.log("Exporting model with format:", format);
+    setIsExporting(true);
 
-    // Simulate download
+    // Mock export logic
+    console.log("Exporting model with options:", options);
+
     setTimeout(() => {
       alert("Model exported successfully!");
+      setIsExporting(false);
     }, 1500);
+  };
+
+  const handleChange = (field: keyof ExportOptions, value: boolean | string) => {
+    setOptions((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -48,66 +68,69 @@ export default function ExportPage() {
           </Canvas>
         </div>
 
-        <div className="w-80 bg-background border-l p-6 overflow-y-auto">
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="export-format">Format</Label>
-              <Select value={format} onValueChange={setFormat}>
-                <SelectTrigger id="export-format">
-                  <SelectValue placeholder="Select format" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="glb">GLB (Binary)</SelectItem>
-                  <SelectItem value="gltf">GLTF (Text)</SelectItem>
-                  <SelectItem value="obj">OBJ</SelectItem>
-                  <SelectItem value="stl">STL</SelectItem>
-                  <SelectItem value="fbx">FBX</SelectItem>
-                </SelectContent>
-              </Select>
-              <p className="text-xs text-muted-foreground mt-1">GLB is recommended for most use cases</p>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="export-quality">Quality</Label>
-              <Select value={quality} onValueChange={setQuality}>
-                <SelectTrigger id="export-quality">
-                  <SelectValue placeholder="Select quality" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="low">Low (Faster)</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="high">High (Slower)</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <Checkbox id="export-textures" checked={includeTextures} onCheckedChange={(checked) => setIncludeTextures(checked === true)} />
-                <Label htmlFor="export-textures">Include Textures</Label>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <Checkbox id="export-compress" defaultChecked />
-                <Label htmlFor="export-compress">Compress Output</Label>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <Checkbox id="export-animations" />
-                <Label htmlFor="export-animations">Include Animations</Label>
-              </div>
-            </div>
-
-            <div className="p-3 bg-muted rounded-md text-sm text-muted-foreground">
-              <p>Preview your model before exporting to ensure everything looks correct.</p>
-              <p className="mt-1">Larger models may take longer to export.</p>
-            </div>
-
-            <Button className="w-full" onClick={handleExport}>
-              <Download className="h-4 w-4 mr-2" />
-              Export Model
-            </Button>
+        <div className="w-80 bg-background border-l p-6 overflow-y-auto space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="export-format">Format</Label>
+            <Select value={options.format} onValueChange={(value) => handleChange("format", value)}>
+              <SelectTrigger id="export-format">
+                <SelectValue placeholder="Select format" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="glb">GLB (Binary)</SelectItem>
+                <SelectItem value="gltf">GLTF (Text)</SelectItem>
+                <SelectItem value="obj">OBJ</SelectItem>
+                <SelectItem value="stl">STL</SelectItem>
+                <SelectItem value="fbx">FBX</SelectItem>
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-muted-foreground mt-1">GLB is recommended for most use cases</p>
           </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="export-quality">Quality</Label>
+            <Select value={options.quality} onValueChange={(value) => handleChange("quality", value)}>
+              <SelectTrigger id="export-quality">
+                <SelectValue placeholder="Select quality" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="low">Low (Faster)</SelectItem>
+                <SelectItem value="medium">Medium</SelectItem>
+                <SelectItem value="high">High (Slower)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <Checkbox id="export-textures" checked={options.includeTextures} onCheckedChange={(checked) => handleChange("includeTextures", !!checked)} />
+              <Label htmlFor="export-textures">Include Textures</Label>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Checkbox id="export-compress" checked={options.compressOutput} onCheckedChange={(checked) => handleChange("compressOutput", !!checked)} />
+              <Label htmlFor="export-compress">Compress Output</Label>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Checkbox id="export-animations" checked={options.includeAnimations} onCheckedChange={(checked) => handleChange("includeAnimations", !!checked)} />
+              <Label htmlFor="export-animations">Include Animations</Label>
+            </div>
+          </div>
+
+          <div className="p-3 bg-muted rounded-md text-sm text-muted-foreground">
+            <p>Preview your model before exporting to ensure everything looks correct.</p>
+            <p className="mt-1">Larger models may take longer to export.</p>
+          </div>
+
+          <Button className="w-full" onClick={handleExport} disabled={isExporting}>
+            {isExporting ? (
+              "Exporting..."
+            ) : (
+              <>
+                <Download className="h-4 w-4 mr-2" /> Export Model
+              </>
+            )}
+          </Button>
         </div>
       </div>
     </div>
